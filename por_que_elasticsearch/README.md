@@ -1,0 +1,1 @@
+# Por qué Elasticsearch
