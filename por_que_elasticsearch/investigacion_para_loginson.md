@@ -6,12 +6,12 @@ Este escenario implicaba dos necesidades básicas:
 - Una alta tasa de ingesta (estimada en 3 millones de líneas de log por segundo).
 - La capacidad de inspeccionar los logs en dos fases secuenciales:
     * Resumen de alto nivel sobre los datos (ej.: códigos HTTP devueltos por una serie de servidores a lo largo de periodos amplios de tiempo).
-    * Análisis detallado de ciertos logs sobre un intervalo seleccionado (ej.: inspeccionar la cusa de un incremento de errores 500).
+    * Análisis detallado de ciertos logs sobre un intervalo seleccionado (ej.: inspeccionar la causa de un incremento de errores 500).
 
 Los requerimientos del proyecto eran los siguientes:
 - Centralización de los logs que generan los sistemas en producción del cliente (Correos).
-- Preprocesado de los datos en crudo para ofrecer una perspectiva resumida a alto nivel de los datos (que siguen varios formatos distintos)
-- Representación gráfica de los datos resumidos
+- Preprocesado de los datos en crudo para ofrecer una perspectiva resumida a alto nivel de los datos (que siguen varios formatos distintos).
+- Representación gráfica de los datos resumidos.
 
 Se tuvieron en cuenta ciertos aspectos a la hora de elegir la base de datos idónea para este caso de uso:
 
@@ -32,4 +32,4 @@ La comparativa se dividió en cuatro secciones, según el tipo de herramientas e
 
 Los detalles de cómo se llevó a cabo cada evaluación se recogen en las páginas 6-10 del artículo.
 
-Como conclusión, en Correos se optó por la combinación de Elasticsearch y Kibana, empleando un componente que en el artículo se denomina *LoginsonRecepor*, y que centraliza los logs y los inserta en Elasticsearch. Ese componente después se liberó con el nombre de [ElasticsearchImporter](https://github.com/carlosvega/ElasticsearchImporter).
+Como conclusión, en Correos se optó por la combinación de Elasticsearch y Kibana, empleando un componente que en el artículo se denomina *LoginsonReceptor*, y que centraliza los logs y los inserta en Elasticsearch. Ese componente después se liberó con el nombre de [ElasticsearchImporter](https://github.com/carlosvega/ElasticsearchImporter).
