@@ -15,4 +15,5 @@
    * [Configuración de Elasticsearch](como_funciona_elasticsearch/configuracion_de_elasticsearch.md)
    * [Monitorización de Elasticsearch](como_funciona_elasticsearch/monitorizacion_de_elasticsearch.md)
 * [Por qué Elasticsearch](por_que_elasticsearch/README.md)
+   * [Investigación para "Loginson" (C. Vega, 2016)](por_que_elasticsearch/investigacion_para_loginson_c_vega,_2016.md)
 
