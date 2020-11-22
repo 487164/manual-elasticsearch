@@ -16,13 +16,14 @@ Los requerimientos del proyecto eran los siguientes:
 Se tuvieron en cuenta ciertos aspectos a la hora de elegir la base de datos idónea para este caso de uso:
 
 - Hay varias razones por las que **no interesaba usar una base de datos distribuida**:
-    * En algunos servidores críticos o equipos de red no se pueden instalar agentes. Esto impide que puedan preprocesar y distribuir sus logs hacia varios nodos recolectores.
-    *  Es mucho más simple hacer que todos los equipos envíen a un único punto central.
-    *  Con una base de datos centralizada es más fácil implementar alta disponibilidad (replicando el punto central en varios hosts) y redundancia, ya que un sistema de recolección centralizado no tiene que mantener estados.
+    * En algunos servidores críticos o equipos de red no se podían instalar agentes. Esto impedía que pudieran preprocesar y distribuir sus logs hacia varios nodos recolectores.
+    * Es mucho más simple hacer que todos los equipos envíen a un único punto central.
+    * Con una base de datos centralizada es más fácil implementar alta disponibilidad (replicando el punto central en varios hosts) y redundancia, ya que un sistema de recolección centralizado no tiene que mantener estados.
 
-- Normalmente, las **queries** que se piden en la gestión de redes y sistemas son bastante **sencillas**. Suelen consistir en rangos de direcciones IP y de puertos dentro de un intervalo temporal. Por tanto, no se necesita soportar expresiones complejas ni la flexibilidad de SQL.
 
-- Se prioriza **escalabilidad vertical** sobre escalabilidad horizontal. Además de las cuestiones mencionadas anteriormente (como son la alta tasa de ingesta y las ventajas expuestas sobre la centralización de la recolección frente a los sistemas distribuidos), se añade el argumento de que un número de nodos reducido permite una configuración activo-activo sencilla para replicación de datos, algo que se complicaría más con un alto número de nodos. También debe considerarse el *overhead* que conlleva la escalabilidad horizontal, típica de los sistemas de big data, especialmente si se utilizan pocos nodos.
+- Normalmente, las **queries** que se piden en la gestión de redes y sistemas son bastante **sencillas**. Suelen consistir en rangos de direcciones IP y de puertos dentro de un intervalo temporal. Por tanto, no se necesitaba soportar expresiones complejas ni la flexibilidad de SQL.
+
+- Se priorizó **escalabilidad vertical** sobre escalabilidad horizontal. Además de las cuestiones mencionadas anteriormente (como son la alta tasa de ingesta y las ventajas expuestas sobre la centralización de la recolección frente a los sistemas distribuidos), se añadió el argumento de que un número de nodos reducido permitía una configuración activo-activo sencilla para replicación de datos, algo que se complicaría más con un alto número de nodos. También debe considerarse el *overhead* que conlleva la escalabilidad horizontal, típica de los sistemas de big data, especialmente si se utilizan pocos nodos.
 
 En el artículo se incluía una revisión del estado del arte para el caso de uso específico de almacenamiento y visualización de logs. Se concluyó que en aquel momento ningún sistema cumplía totalmente los requerimientos mencionados.
 
