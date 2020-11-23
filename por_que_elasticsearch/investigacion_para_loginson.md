@@ -1,5 +1,7 @@
 # Investigación para "Loginson"
 
+## Escenario
+
 En 2016, Carlos Vega (ex-empleado de Naudit) publicó un artículo sobre ["Loginson", un sistema de transformación y carga para análisis de logs a gran escala en grandes infraestructuras IT](https://arxiv.org/abs/1703.02602). En él, hizo un estudio sobre qué herramientas se adecuarían mejor al caso de uso que se proponía (la recoleccción y procesamiento de logs para la infraestructura de Correos).
 
 Este escenario implicaba dos necesidades básicas:
@@ -13,6 +15,8 @@ Los requerimientos del proyecto eran los siguientes:
 - Preprocesado de los datos en crudo para ofrecer una perspectiva resumida a alto nivel de los datos (que siguen varios formatos distintos).
 - Representación gráfica de los datos resumidos.
 
+## Valoraciones
+
 Se tuvieron en cuenta ciertos aspectos a la hora de elegir la base de datos idónea para este caso de uso:
 
 - Hay varias razones por las que **no interesaba usar una base de datos distribuida**:
@@ -25,7 +29,7 @@ Se tuvieron en cuenta ciertos aspectos a la hora de elegir la base de datos idó
 
 - Se priorizó **escalabilidad vertical** sobre escalabilidad horizontal. Además de las cuestiones mencionadas anteriormente (como son la alta tasa de ingesta y las ventajas expuestas sobre la centralización de la recolección frente a los sistemas distribuidos), se añadió el argumento de que un número de nodos reducido permitía una configuración activo-activo sencilla para replicación de datos, algo que se complicaría más con un alto número de nodos. También debe considerarse el *overhead* que conlleva la escalabilidad horizontal, típica de los sistemas de big data, especialmente si se utilizan pocos nodos.
 
-En el artículo se incluía una revisión del estado del arte para el caso de uso específico de almacenamiento y visualización de logs. Se concluyó que en aquel momento ningún sistema cumplía totalmente los requerimientos mencionados.
+En el artículo se incluía una revisión del estado del arte para el caso de uso específico de almacenamiento y visualización de logs. Se concluyó que en aquel momento ningún sistema cumplía por completo los requerimientos del proyecto, por lo que se eligieron las herramientas que mejor se adaptaban a las necesidades de este escenario y se resolvieron sus carencias abordando el desarrollo de algunos elementos.
 
 La comparativa se dividió en cuatro secciones, según el tipo de herramientas evaluadas: brokers y balanceadores de carga, almacenamiento en bases de datos, preprocesado y representación gráfica. Esta tabla resume los aspectos de rendimiento más destacados de cada herramienta en su campo:
 
@@ -33,4 +37,14 @@ La comparativa se dividió en cuatro secciones, según el tipo de herramientas e
 
 Los detalles de cómo se llevó a cabo cada evaluación se recogen en las páginas 6-10 del artículo.
 
-Como conclusión, en Correos se optó por la combinación de Elasticsearch y Kibana, empleando un componente que en el artículo se denomina *LoginsonReceptor*, y que centraliza los logs y los inserta en Elasticsearch. Ese componente después se liberó con el nombre de [ElasticsearchImporter](https://github.com/carlosvega/ElasticsearchImporter).
+## Ventajas de Elasticsearch
+
+Además de que Elasticsearch cumple con los requisitos anteriores, debe mencionarse que su comunidad es bastante grande y la plataforma es muy polivalente. Cuenta con Kibana, una potente aplicación web de visualización. El stack ELK se completa con Logstash, una herramienta que permite recolectar y parsear los logs antes de insertarlos en Elasticsearch. A pesar de que ejecutar Elasticsearch sobre la JVM requiere bastantes recursos de memoria, se reveló como la mejor solución en este despliegue.
+
+Otro aspecto relevante en este proyecto era la importancia de usar los menores recursos posibles en el cliente (reducir el número de nodos necesarios, por ejemplo), con el objetivo de abaratar costes.
+
+Hay que destacar, sin embargo, que alternativas como InfluxDB, para la base de datos, o Grafana, para la visualización, también son interesantes y en otros proyectos de Naudit han resultado más adecuadas.
+
+En resumen, como lo primordial en Correos fue mantener pocos recursos y ser lo más versátiles posible, en aquel momento se optó por la combinación de Elasticsearch y Kibana.
+
+Al principio se empleaba un componente que en el artículo se denomina *LoginsonReceptor*, encargado de centralizar los logs e insertarlos en Elasticsearch. Ese componente evolucionó al [ElasticsearchImporter](https://github.com/carlosvega/ElasticsearchImporter) en Python.
