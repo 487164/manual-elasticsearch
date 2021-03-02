@@ -1,7 +1,19 @@
 # Monitorización de Elasticsearch
 
 ```
-GET _stats?filter_path=indices.index_name_here.
+GET _nodes/stats?pretty
+```
+[[doc] Cluster nodes stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)
+```
+# Se puede filtrar en el JSON de respuesta, por ejemplo:
+
+naudit@tarcoles:~$ curl localhost:27015/_stats?filter_path=_all.total.docs; echo
+{"_all":{"total":{"docs":{"count":88863005,"deleted":117222}}}}
+
+naudit@tarcoles:~$ curl localhost:27015/_nodes/stats?filter_path=nodes.*.{name,ip,jvm.gc.collectors}; echo
+{"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"name":"GyT_node1"}}}
+{"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"ip":"10.252.3.142:9300"}}}
+{"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"jvm":{"gc":{"collectors":{"young":{"collection_count":19857,"collection_time_in_millis":732896},"old":{"collection_count":0,"collection_time_in_millis":0}}}}}}}
 ```
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
@@ -19,34 +31,10 @@ GET _cluster/health?pretty
 
 Al crear un índice o al reiniciar un nodo, los shards afectados pasan por los estados `initializing` (`realocating`) y `started` o `unassigned`.
 
-## Rendimiento del nodo
-
-### CPU
-
-Una actividad intensa del Garbage Collector puede producir picos de uso de CPU.
-
-Se hacen dos tipos de recolección de basura: recientes y antiguas. Puede consultarse **count** y **time**
-```
-GET _nodes/stats/jvm?pretty
-# jvm.gc.collectors.young.collection_count
-# jvm.gc.collectors.young.collection_time_in_millis
-
-# jvm.gc.collectors.old.collection_count
-# jvm.gc.collectors.old.collection_time_in_millis
-```
-
-### RAM
-
-Por regla general, se aconseja asignar <50% de la RAM disponible al heap de la JVM, y nunca más de 32GB*.
-
----
-*El máximo de 32GB viene porque, para usar más, la JVM necesitaría punteros de 64 bits (no pudiendo usar entonces los OOPs comprimidos de 32 bits).
-
 ## Java
 
 ### Uso del heap y Garbage Collection
 
-- Evitar que la JVM swapee a disco
 - Definir la memoria heap para Elastic:
 
 ```
@@ -57,15 +45,42 @@ Por regla general, se aconseja asignar <50% de la RAM disponible al heap de la J
 
 ```
 
+¿Cuánto heap? Por lo general, 50% de la RAM disponible.
+```
+GET /_cat/nodes?h=heap.max
+```
+
+- Evitar que la JVM swapee a disco. [[1]](https://www.notion.so/Swap-d34ce6357d094e49ab3841bd8eca57e6)
+
 - Patrón de diente de sierra: indica que el GC de la JVM está funcionando correctamente.
 
 ![](heap_sawtooth_pattern.png)
 
 Con varios nodos, la sierra se desdibuja porque cada GC tiene lugar en momentos distintos, pero puede reconocerse el patrón.
-- ¿Cuánto heap? Por lo general, 50% de la RAM disponible.
+
+## Rendimiento del nodo
+
+### CPU
+
+Una actividad intensa del Garbage Collector puede producir picos de uso de CPU. [[2]](https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#memory-usage-and-garbage-collection)
+
+Se hacen dos tipos de recolección de basura: recientes y antiguas. Puede consultarse **count** y **time**
 ```
-GET /_cat/nodes?h=heap.max
+GET _nodes/stats/jvm?pretty
+
+# jvm.gc.collectors.young.collection_count
+# jvm.gc.collectors.young.collection_time_in_millis
+
+# jvm.gc.collectors.old.collection_count
+# jvm.gc.collectors.old.collection_time_in_millis
 ```
+
+### RAM
+
+Por regla general, se aconseja asignar como máximo 50% de la RAM disponible al heap de la JVM [[3]](https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html), y nunca más de 32GB*.
+
+---
+*El máximo de 32GB viene porque, para usar más, la JVM necesitaría punteros de 64 bits (no pudiendo usar entonces los OOPs comprimidos de 32 bits).
 
 ## Rendimiento de las búsquedas
 
@@ -74,15 +89,17 @@ GET /_cat/nodes?h=heap.max
 Las latencias por petición que expone Elasticsearch son por shard, no la de la petición en general.
 
 ```
+GET _nodes/stats?filter_path=nodes.*.indices.search*
+
 # latencia por petición:
-indices.search.query.total
-indices.search.query.current
-indices.search.query.time_in_millis
+indices.search.query_total
+indices.search.query_current
+indices.search.query_time_in_millis
 
 # ratio de peticiones:
-indices.search.fetch.total
-indices.search.fetch.current
-indices.search.fetch.time_in_millis
+indices.search.fetch_total
+indices.search.fetch_current
+indices.search.fetch_time_in_millis
 ```
 
 ![](query_time_2d.png)
@@ -93,7 +110,11 @@ indices.search.fetch.time_in_millis
 ### Latencia de indexado, ratio de indexado
 
 ```
+GET _nodes/stats?filter_path=nodes.*.indices.indexing*
+
+# latencia de indexado:
 indices.indexing.{total,current,time_in_millis}
+
 indices.refresh.{total,time_in_millis}
 indices.flush.{total,time_in_millis}
 indices.get_missing.{total,time_in_millis}
