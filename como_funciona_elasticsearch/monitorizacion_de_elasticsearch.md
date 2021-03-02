@@ -48,7 +48,7 @@ Al crear un índice o al reiniciar un nodo, los shards afectados pasan por los e
 GET /_cat/nodes?h=heap.max
 ```
 
-- Evitar que la JVM swapee a disco. [[1]](https://www.notion.so/Swap-d34ce6357d094e49ab3841bd8eca57e6)
+- Evitar que la JVM swapee a disco (al arrancar la JVM de Elasticsearch reserva toda la RAM que podría necesitar y con eso nunca debería swapear. Por eso es importante asegurarse de que reserva todo de golpe, especialmente en Red Hat). [[1]](https://www.notion.so/Swap-d34ce6357d094e49ab3841bd8eca57e6)
 
 - Patrón de diente de sierra: indica que el GC de la JVM está funcionando correctamente.
 
