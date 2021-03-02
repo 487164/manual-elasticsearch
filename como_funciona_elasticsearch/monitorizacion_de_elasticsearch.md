@@ -16,8 +16,6 @@ naudit@tarcoles:~$ curl localhost:27015/_nodes/stats?filter_path=nodes.*.{name,i
 {"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"jvm":{"gc":{"collectors":{"young":{"collection_count":19857,"collection_time_in_millis":732896},"old":{"collection_count":0,"collection_time_in_millis":0}}}}}}}
 ```
 
-https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html
-
 ## Salud del cluster
 
 ### Nodos y shards
@@ -113,11 +111,11 @@ indices.search.fetch_time_in_millis
 GET _nodes/stats?filter_path=nodes.*.indices.indexing*
 
 # latencia de indexado:
-indices.indexing.{total,current,time_in_millis}
+indices.indexing.index_{total,current,time_in_millis}
 
-indices.refresh.{total,time_in_millis}
-indices.flush.{total,time_in_millis}
-indices.get_missing.{total,time_in_millis}
+indices.refresh.total{,time_in_millis}
+indices.flush.total{,time_in_millis}
+indices.get_missing.total{,time_in_millis}
 ```
 
 ![](query_time_2d.png)
