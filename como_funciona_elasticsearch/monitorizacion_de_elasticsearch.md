@@ -118,5 +118,5 @@ indices.flush.total{,time_in_millis}
 indices.get_missing.total{,time_in_millis}
 ```
 
-![](query_time_2d.png)
-![](query_time_1h.png)
+![](indexing_time_2d.png)
+![](indexing_time_1h.png)
