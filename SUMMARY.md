@@ -2,10 +2,6 @@
 
 * [Introducción](README.md)
 * [Conceptos básicos](conceptos_basicos/README.md)
-   * [Índices y documentos](conceptos_basicos/indice.md)
-   * [Queries](conceptos_basicos/queries.md)
-   * [Sharding](conceptos_basicos/sharding.md)
-   * [API de Elasticsearch](conceptos_basicos/api_de_elasticsearch.md)
 * [Librerías de Elasticsearch en Python](librerias_de_elasticsearch_en_python/README.md)
    * [elasticsearch](librerias_de_elasticsearch_en_python/elasticsearch.md)
    * [elasticsearch_dsl](librerias_de_elasticsearch_en_python/elasticsearch_dsl.md)
