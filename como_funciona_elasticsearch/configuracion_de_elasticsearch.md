@@ -43,7 +43,7 @@ Se puede comprobar el número de shards que tiene un nodo con:
 GET _cat/shards?pretty
 ```
 
-### Evita nodos "hotspot"
+### Evitar nodos "hotspot"
 
 Esto solo es relevante para configuraciones de cluster.
 
