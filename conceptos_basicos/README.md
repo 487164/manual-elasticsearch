@@ -74,8 +74,6 @@ $ curl localhost:27015/alarms 2>/dev/null | python -m json.tool
 
 En versiones antiguas de Elasticsearch, se permitía el uso arbitrario de "tipos de documento" (y mappings distintos) en un mismo índice, con el campo "_type". En las últimas versiones, este campo siempre tiene el valor "_doc" y se mantiene el mismo mapping para todo el índice.
 
-## Queries
-
 ## Shards
 
 [Notas sobre asignación de shards](../como_funciona_elasticsearch/configuracion_de_elasticsearch.html#notas-sobre-asignación-de-shards)

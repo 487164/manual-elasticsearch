@@ -1,6 +1,8 @@
 # Monitorización de Elasticsearch
 
-Aquí se indican los endpoints de los que se obtienen estas métricas en la API de gestión de Elasticsearch, como referencia. Lo recomendable es vigilarlas usando el dashboard "Elasticsearch Details" que viene con [Theseus](https://repo1.naudit.es/theseus/theseus-master) y su ["elasticsearch-prometheus-exporter"](https://github.com/justwatchcom/elasticsearch_exporter) (las gráficas están sacadas de los dashboards de Theseus). Si se tiene configurado el [repositorio deb de Naudit](https://repo1.naudit.es/deb-repo/naudit-repos), pueden instalarse Theseus y sus dependencias simplemente con `sudo apt install theseus-master`.
+Aquí se indican los endpoints de los que se obtienen estas métricas en la API de gestión de Elasticsearch, como referencia. Lo recomendable es vigilarlas usando el dashboard "Elasticsearch Details" que viene con [Theseus](https://repo1.naudit.es/theseus/theseus-master) y su ["elasticsearch-prometheus-exporter"](https://github.com/justwatchcom/elasticsearch_exporter) (las gráficas de esta sección están sacadas de los dashboards de Theseus). Si se tiene configurado el [repositorio deb de Naudit](https://repo1.naudit.es/deb-repo/naudit-repos), pueden instalarse Theseus y sus dependencias simplemente con `sudo apt install theseus-master`.
+
+![](theseus_elasticsearch_details.png)
 
 ```
 GET _nodes/stats?pretty

@@ -4,6 +4,7 @@
 * [Conceptos básicos](conceptos_basicos/README.md)
    * [API de Elasticsearch](conceptos_basicos/api_de_elasticsearch.md)
    * [Templates](conceptos_basicos/templates.md)
+   * [Queries](conceptos_basicos/queries.md)
 * [Librerías de Elasticsearch en Python](librerias_de_elasticsearch_en_python/README.md)
    * [elasticsearch](librerias_de_elasticsearch_en_python/elasticsearch.md)
    * [elasticsearch_dsl](librerias_de_elasticsearch_en_python/elasticsearch_dsl.md)
