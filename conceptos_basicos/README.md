@@ -78,6 +78,6 @@ En versiones antiguas de Elasticsearch, se permitía el uso arbitrario de "tipos
 
 ## Shards
 
-[Notas sobre asignación de shards](../como_funciona_elasticsearch/configuracion_de_elasticsearch.html#notas-sobre-asignacin-de-shards)
+[Notas sobre asignación de shards](../como_funciona_elasticsearch/configuracion_de_elasticsearch.html#notas-sobre-asignación-de-shards)
 
 ## API de Elasticsearch
