@@ -1,5 +1,7 @@
 # Monitorización de Elasticsearch
 
+Aquí se indican los endpoints de los que se obtienen estas métricas en la API de gestión de Elasticsearch, como referencia. Lo recomendable es vigilarlas usando el dashboard "Elasticsearch Details" que viene con [Theseus](https://repo1.naudit.es/theseus/theseus-master) y su ["elasticsearch-prometheus-exporter"](https://github.com/justwatchcom/elasticsearch_exporter) (las gráficas están sacadas de los dashboards de Theseus). Si se tiene configurado el [repositorio deb de Naudit](https://repo1.naudit.es/deb-repo/naudit-repos), pueden instalarse Theseus y sus dependencias simplemente con `sudo apt install theseus-master`.
+
 ```
 GET _nodes/stats?pretty
 ```
@@ -60,7 +62,7 @@ Con varios nodos, la sierra se desdibuja porque cada GC tiene lugar en momentos 
 
 ### CPU
 
-Una actividad intensa del Garbage Collector puede producir picos de uso de CPU. [[2]](https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#memory-usage-and-garbage-collection)
+Un indexado cargado, queries pesadas o una actividad intensa del Garbage Collector pueden producir picos de uso de CPU. [[2]](https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics/#memory-usage-and-garbage-collection)
 
 Se hacen dos tipos de recolección de basura: recientes y antiguas. Puede consultarse **count** y **time**
 ```
