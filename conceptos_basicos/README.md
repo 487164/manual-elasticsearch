@@ -40,7 +40,7 @@ Thu 04 Mar 2021 03:30:17 AM CST
 
 Los índices también tienen *mappings* y configuración:
 
-- El *mapping* es una colección de *campos* que los documentos de un índice deben tener. En el ejemplo anterior, según el mapping del índice "alarms", sus documentos tendrán los campos "@timestamp" (el @ por convención indica que es el campo temporal, a partir del cual podrán dibujarse series temporales en Grafana/Kibana y filtrar por rango temporal), "severity", "value", "system", "title" y "term".
+- El *mapping* es una colección de *campos* que los documentos de un índice pueden tener (Elastic es NoSQL, los documentos no tienen por qué tener los mismos campos todos). En el ejemplo anterior, según el mapping del índice "alarms", sus documentos tendrán los campos "@timestamp" (el @ por convención indica que es el campo temporal, a partir del cual podrán dibujarse series temporales en Grafana/Kibana y filtrar por rango temporal), "severity", "value", "system", "title" y "term".
 - La configuración incluye el nombre del índice, su fecha de creación y el número de shards.
 
 ```
@@ -79,5 +79,3 @@ En versiones antiguas de Elasticsearch, se permitía el uso arbitrario de "tipos
 ## Shards
 
 [Notas sobre asignación de shards](../como_funciona_elasticsearch/configuracion_de_elasticsearch.html#notas-sobre-asignación-de-shards)
-
-## API de Elasticsearch
