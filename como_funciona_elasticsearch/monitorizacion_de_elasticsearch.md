@@ -37,28 +37,13 @@ Al crear un índice o al reiniciar un nodo, los shards afectados pasan por los e
 
 ### Uso del heap y Garbage Collection
 
-- Definir la memoria heap para Elastic:
-
-```
-# si los valores de memoria máx. y mín. son iguales,
-# elastic no necesita asignar memoria adicional en ejecución:
-/bin/elasticsearch -Xmx16g -Xms16g
-#               máximo^       ^mínimo
-
-```
-
-¿Cuánto heap? Por lo general, 50% de la RAM disponible.
-```
-GET /_cat/nodes?h=heap.max
-```
-
-- Evitar que la JVM swapee a disco (al arrancar la JVM de Elasticsearch reserva toda la RAM que podría necesitar y con eso nunca debería swapear. Por eso es importante asegurarse de que reserva todo de golpe, especialmente en Red Hat). [[1]](https://www.notion.so/Swap-d34ce6357d094e49ab3841bd8eca57e6)
-
 - Patrón de diente de sierra: indica que el GC de la JVM está funcionando correctamente.
 
 ![](heap_sawtooth_pattern.png)
 
 Con varios nodos, la sierra se desdibuja porque cada GC tiene lugar en momentos distintos, pero puede reconocerse el patrón.
+
+- Evitar que la JVM swapee a disco (al arrancar la JVM de Elasticsearch reserva toda la RAM que podría necesitar y con eso nunca debería swapear. Por eso es importante asegurarse de que reserva todo de golpe, especialmente en Red Hat). [[1]](https://www.notion.so/Swap-d34ce6357d094e49ab3841bd8eca57e6)
 
 ## Rendimiento del nodo
 

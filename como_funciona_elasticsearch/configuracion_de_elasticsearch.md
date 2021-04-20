@@ -14,6 +14,23 @@ bootstrap.memory_lock: true
 discovery.type: single-node
 ```
 
+## Definir la memoria heap para Elastic:
+
+¿Cuánto heap? Por lo general, 50% de la RAM disponible. Nunca más de 32GB (es lo máximo que puede usar Elastic).
+
+```
+# si los valores de memoria máx. y mín. son iguales,
+# elastic no necesita asignar memoria adicional en ejecución:
+/bin/elasticsearch -Xmx16g -Xms16g
+#               máximo^       ^mínimo
+
+```
+
+Se puede consultar el heap máximo asignado en el nodo actual con:
+```
+GET /_cat/nodes?h=heap.max
+```
+
 ## Notas sobre asignación de shards
 
 [[doc] Size your shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/size-your-shards.html)
