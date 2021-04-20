@@ -49,7 +49,7 @@ Con los pasos incrementales que se definen a continuación lo que se pretende es
 4. Ir aumentando el número de shards para averiguar cuando comienza a ser contraproducente añadir más.
 
 ### 4. Benchmark para cluster multi-nodo
-**Objetivo:** Saber cuanto almacenamiento en Elastic vamos a utilizar por documento y optimizar esto mediante mappings.
+**Objetivo:** Conocer el punto de saturación para varios nodos.
 
 **Pasos:**
 1. Usar un pequeño cluster representativo, escalado hacia abajo de lo que será nuestro sistema final. Por ejemplo, dos nodos, uno primario y uno de replica.
