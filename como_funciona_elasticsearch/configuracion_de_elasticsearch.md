@@ -20,19 +20,19 @@ discovery.type: single-node
 
 ### CPU/Threads
 
-Ten en cuenta que, aunque una query afecte a múltiples shards, cada shard ejecuta la query en un solo hilo.
+Ten en cuenta que, aunque un shard puede ejecutar multiples queries concurrentemente, **queries que afecten a un gran número de shareds pueden agotar la pool de threads** ya que cada shard ejecuta la query en un solo hilo. Esto implicará throughput bajo y búsquedas lentas. 
 
 ### Cada shard tiene overhead
 
-Cada shard asignado consume recursos de CPU y memoria, pero el verdadero peligro viene de los metadatos de los segmentos almacenados en el heap. La mayoría de los shards tienen varios [segmentos de Lucene](https://lucene.apache.org/core/8_8_2/core/org/apache/lucene/codecs/lucene87/package-summary.html#Segments), que contienen los datos de un índice y se van mergeando, cada vez en menos segmentos más grandes. Cada shard abierto consume una cantidad de heap fija en los metadatos de los segmentos, memoria que el GC no puede liberar.
+Cada shard asignado consume recursos de CPU y memoria, pero el verdadero peligro viene de los metadatos de los segmentos almacenados en el heap. La mayoría de los shards tienen varios [segmentos de Lucene](https://lucene.apache.org/core/8_8_2/core/org/apache/lucene/codecs/lucene87/package-summary.html#Segments), que contienen los datos de un índice y se van mergeando, cada vez en menos segmentos más grandes. Cada shard abierto consume una cantidad de heap fija en los metadatos de los segmentos, memoria que el GC no puede liberar. En la mayoría de los casos, **un conjunto pequeño de shards grandas utiliza menos recursos que muchos shards pequeños.**
 
 ### Eliminar índices en vez de documentos
 
-Los documentos borrados no se eliminan realmente hasta que no se *fusionan* (mergean), así que eliminar documentos no va a liberar ningún recurso hasta que no se dispare el siguiente merge.
+Los documentos borrados no se eliminan realmente hasta que no se *fusionan* (mergean) los segmentos correspondientes, así que eliminar documentos no va a liberar ningún recurso hasta que no se dispare el siguiente merge. En caso de necesitar espacio es mejor **eliminar los índices completamente en vez de sus documentos individualmente** para que Elastic los elimine inmediatamente.
 
-### El tamaño de los shards debería estar entre 10GB y 50GB
+### El tamaño de los shards debería estar entre 10GB y 65GB
 
-Esta recomendación está basada en el tiempo necesario para que un único shard de 50GB se recupere de un fallo.
+Esta recomendación está basada en el tiempo necesario para que un único shard de 65GB se recupere de un fallo.
 
 ### Intentar tener como mucho 20 shards por GB de heap
 
@@ -57,4 +57,20 @@ PUT /my-index-000001/_settings
     "routing.allocation.total_shards_per_node" : 5
   }
 }
+```
+
+### Manejar nodos con demasiados shards
+Si en un nodo (individual o perteneciente a un cluster) se estan produciendo problemas de estabilidad debido a un número excesivo de shards podemos utilizar alguno de los siguientes métodos:
+* Eliminar índices vacios o innecesarios.
+* Cambiar los índices mas antiguos para que abarquen rangos de tiampo más grandes. De diario a mensual, de mensual a semestral, etc... Para ello podemos reindexar:
+```
+POST \_reindex { "source": { "index": "my-index-2099.10.\*" }, "dest": { "index": "my-index-2099.10" } }
+```
+* En índices en los que ya no se escribe podemos forzar los merges en horas de poca carga utilizando:
+```
+POST my-index-000001/\_forcemerge
+```
+* En índices en los que ya no se escribe podemos reducir (*shrink*) el número de shards con
+```
+POST my-index-000001/\_shrink/my-shrunken-index-000001
 ```
