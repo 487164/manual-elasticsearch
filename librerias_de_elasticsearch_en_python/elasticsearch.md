@@ -1,5 +1,5 @@
 # [elasticsearch](https://elasticsearch-py.readthedocs.io/en/v7.12.0/api.html#elasticsearch)
-La librería base de elasticsearch incluye el objeto Elasicsearch (que necesitaremos también para elasticsearch_dsl) que actuará como connector entre nuestro código y Elastic.
+La librería base de elasticsearch incluye el objeto Elasticsearch (que necesitaremos también para elasticsearch_dsl) que actuará como connector entre nuestro código y Elastic.
 
 Realizar consultas e insertar datos desde la librería base es algo más costoso que mediante elasticsearch_dsl ya que requiere escribir las consultas DSL directamente en JSON.
 
