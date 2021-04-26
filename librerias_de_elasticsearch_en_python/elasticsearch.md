@@ -3,7 +3,7 @@ La librería base de elasticsearch incluye el objeto Elasicsearch (que necesitar
 
 Realizar consultas e insertar datos desde la librería base es algo más costoso que mediante elasticsearch_dsl ya que requiere escribir las consultas DSL directamente en JSON.
 
-Como ventaja, incluye abstracciones para realizar tareas de monitorización (get cluster status, startup nodes, etc) 
+Como ventaja, incluye abstracciones para realizar tareas de monitorización (get cluster status, startup nodes, etc)
 
 Podríamos realizar una query con la librería base con este código:
 ```python
