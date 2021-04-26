@@ -1,5 +1,5 @@
 # [elasticsearch_dsl](https://elasticsearch-dsl.readthedocs.io/en/latest/search_dsl.html)
-elasitcsearch_dsl está construida directamente sobre la librería base y su objetivo es hacer consultas a ES más rápido y cómodo.
+elasticsearch_dsl está construida directamente sobre la librería base y su objetivo es hacer consultas a ES más rápido y cómodo.
 
 Para ello trata de replicar la estructura del JSON DSL, pero dentro de la sintaxis de Python (sin necesidad de declarar un JSON string con la consulta).
 
@@ -39,12 +39,12 @@ En la documentación podemos encontrar ejemplos de persistencia de datos usando 
 
 ### Tips y consejos
 
-La documentación de elasticsearch_dsl va completandose con el tiempo y cada vez es menos necesario mirar el código para entender funcionalidades, pero es posible que quieras hacer algo que no aparece claramente en la documentación. Para estos casos, el proceso ha seguir debería ser el siguiente:
+La [documentación de elasticsearch_dsl](https://elasticsearch-dsl.readthedocs.io/) va completándose con el tiempo y cada vez es menos necesario mirar el código para entender funcionalidades, pero es posible que quieras hacer algo que no aparece claramente en la documentación. Para estos casos, el proceso ha seguir debería ser el siguiente:
 
-- Preguntar en el canal de off-topic (por ejemplo) para ver si alguien ya ha resuelto el problema (en caso de ser así, igual es interesante actualizar esta documentación con esa información)
+- Preguntar en el canal de off-topic de Naudit (por ejemplo) para ver si alguien ya ha resuelto el problema (en caso de ser así, igual es interesante actualizar esta documentación con esa información)
 - Búsqueda en internet (los foros de elastic, stackoverflow, github..)
 - Tratar de trasladar la query a DSL JSON y emplear la librería base
-- Búsqueda dentro del github de elasticsearch_dsl
+- Búsqueda dentro del [github de elasticsearch_dsl](https://github.com/elastic/elasticsearch-dsl-py)
 - Mirar el código fuente de la librería
 
 #### Referencias a *dotted fields* (o subcampos, por ejemplo agent.hostname)
