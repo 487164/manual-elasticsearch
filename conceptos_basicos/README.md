@@ -1,6 +1,6 @@
 # Conceptos básicos
 
-[Elasticsearch](https://www.elastic.co/es/what-is/elasticsearch) es un motor de búsqueda y análisis basado en [Apache Lucene](https://lucene.apache.org/). Nosotros lo utilizamos como base de datos analítica. Principalmente, con Elastic almacenamos logs y usamos sus capacidades de filtrado y visualización (con [Kibana](https://www.elastic.co/es/what-is/kibana) o [Grafana](https://grafana.com/grafana/)) para identificar problemas o extraer información de interés.
+[Elasticsearch](https://www.elastic.co/es/what-is/elasticsearch) es un motor de búsqueda y análisis basado en [Apache Lucene](https://lucene.apache.org/) y escrito en Java. Nosotros lo utilizamos como base de datos analítica. Principalmente, con Elastic almacenamos logs y usamos sus capacidades de filtrado y visualización (con [Kibana](https://www.elastic.co/es/what-is/kibana) o [Grafana](https://grafana.com/grafana/)) para identificar problemas o extraer información de interés.
 
 ## Índices y documentos
 
