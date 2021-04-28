@@ -6,7 +6,7 @@ Lucene trabaja con **índices** y **documentos**. Los índices están formados p
 
 El principal objetivo de esta organización de los datos es el de, tras invertir tiempo en su indexado estructurado, agilizar enormemente las búsquedas. De esta manera se permite un acceso rápido y dinámico a una gran cantidad de datos.
 
-## ¿Para qué usa ElasticSearch Lucene?
+## ¿Para qué usa Elasticsearch Lucene?
 
 Elastic está basado en Lucene y amplía su alcance y funcionalidades para crear un sistema completo de almacenamiento y búsqueda de datos. Por este motivo, todas las características sobre Lucene que se explican en este apartado son aplicables a los datos gestionados con Elasticsearch.
 
@@ -45,12 +45,12 @@ En Lucene quedarían organizados de la siguiente manera:
 
 ### Analizadores
 
-En el ejemplo anterior podemos ver cómo hay claramente algunas parabras que son menos significativas o que apenas aportan información al texto que estamos almacenando (en, el) y palabras similares almacenadas como diferentes (usa, usamos). Es en este punto donde entran en juego los analizadores, encargados de extraer la información mas valiosa del texto para facilitar su posterior búsqueda.
+En el ejemplo anterior podemos ver cómo hay claramente algunas parabras que son menos significativas o que apenas aportan información al texto que estamos almacenando (en, el) y palabras similares almacenadas como diferentes (usa, usamos). Es en este punto donde entran en juego los analizadores, encargados de extraer la información más valiosa del texto para facilitar su posterior búsqueda.
 
 Hay una gran variedad de analizadores que se pueden concatenar unos detrás de otros dependiendo de las necesidades específicas, e incluso se pueden definir personalizados. Los más usuales son los siguientes:
 * StopWords. Elimina las palabras no significativas como: a, o , en, el, la, etc...
 * Lowercase. Convierte todas las palabras a minúscula.
-* RootWord. Útil para almacenar palabras con diferentes terminaciones como la misma. Por ejemplo, usamos, usa, usaré, etc... como us.
+* RootWord. Útil para almacenar palabras con diferentes terminaciones como la misma. Por ejemplo: usamos, usa, usaré, etc... como us.
 
 Cabe destacar que algunos de los analizadores son dependientes del idioma.
 
