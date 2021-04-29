@@ -6,7 +6,7 @@
 path.data: /disco_flowlytics/elasticsearch/data
 path.logs: /var/log/elasticsearch
 
-node.name: GyT_node1
+node.name: node1
 network.host: ["10.252.3.142", "127.0.0.1"]
 http.port: 27015
 

@@ -11,10 +11,10 @@ GET _nodes/stats?pretty
 ```
 # Se puede filtrar en el JSON de respuesta, por ejemplo:
 
-naudit@tarcoles:~$ curl localhost:27015/_stats?filter_path=_all.total.docs; echo
+naudit@sonda:~$ curl localhost:27015/_stats?filter_path=_all.total.docs; echo
 {"_all":{"total":{"docs":{"count":88863005,"deleted":117222}}}}
 
-naudit@tarcoles:~$ curl localhost:27015/_nodes/stats?filter_path=nodes.*.{name,ip,jvm.gc.collectors}; echo
+naudit@sonda:~$ curl localhost:27015/_nodes/stats?filter_path=nodes.*.{name,ip,jvm.gc.collectors}; echo
 {"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"name":"GyT_node1"}}}
 {"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"ip":"10.252.3.142:9300"}}}
 {"nodes":{"ADGpmzGlS1OdyYShUXCU5Q":{"jvm":{"gc":{"collectors":{"young":{"collection_count":19857,"collection_time_in_millis":732896},"old":{"collection_count":0,"collection_time_in_millis":0}}}}}}}

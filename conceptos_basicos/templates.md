@@ -5,7 +5,7 @@ sirve para definir algunas configuraciones a la hora de crear ciertos índices (
 Se les puede dar cualquier nombre y se aplican según el orden establecido en el campo *order*:
 
 ```
-naudit@tarcoles:~$ curl localhost:27015/_cat/templates?v
+naudit@sonda:~$ curl localhost:27015/_cat/templates?v
 name                              index_patterns               order
 default_shards                    [*]                          1
 importer                          [importer-*]                 3
@@ -17,7 +17,7 @@ el propio índice a posteriori.
 Por ejemplo, así se crearía una plantilla "default shards" que se aplica en primer lugar y fija en 1 el número de shards de todos los índices:
 
 ```
-naudit@tarcoles:~$ curl -XPUT localhost:27015/_template/default_shards?pretty -H 'Content-Type: application/json' -d'
+naudit@sonda:~$ curl -XPUT localhost:27015/_template/default_shards?pretty -H 'Content-Type: application/json' -d'
 {
 "index_patterns" : ["*"],
 "order" : 1,
@@ -27,7 +27,7 @@ naudit@tarcoles:~$ curl -XPUT localhost:27015/_template/default_shards?pretty -H
 {
   "acknowledged" : true
 }
-naudit@tarcoles:~$ curl localhost:27015/_template/default_shards?pretty # (comprobación)
+naudit@sonda:~$ curl localhost:27015/_template/default_shards?pretty # (comprobación)
 {
   "default_shards" : {
     "order" : 1,
@@ -53,7 +53,7 @@ Usamos la plantilla "importer" para definir también el tipo de los campos que i
 tenga datos de tipo entero, "src_ip" sea de [tipo IP](https://www.elastic.co/guide/en/elasticsearch/reference/current/ip.html), etc.
 
 ```
-naudit@tarcoles:~$ curl localhost:27015/_template/importer?pretty
+naudit@sonda:~$ curl localhost:27015/_template/importer?pretty
 {
   "importer" : {
     "order" : 3,

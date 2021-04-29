@@ -16,9 +16,9 @@ Elasticsearch organiza los datos en *índices*. Cada índice es una colección d
     "@timestamp": 1614850217137,
     "severity": "4",
     "value": 9990.0,
-    "system": "Portal Financiero",
+    "system": "Ambiente Producción",
     "title": "Número elevado de eventos windows",
-    "term": "BOCAY"
+    "term": "SERVIDOR1"
 }
 ```
 
