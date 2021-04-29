@@ -10,7 +10,7 @@ y cerramos una primera versión completa en abril de 2021.
 Nuestra primera intención es que sirva como base para quien empieza con Elastic, pero está abierto a [contribuciones y mejoras](https://repo1.naudit.es/jartigag/manual-elasticsearch/-/merge_requests).
 
 <center>
-![](naudit.png)
+    <img src="https://www.naudit.es/wp-content/uploads/logo2.png" width="100%">
 </center>
 
 #### Lista de contribuidores
