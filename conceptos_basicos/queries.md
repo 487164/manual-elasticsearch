@@ -29,7 +29,7 @@ naudit@sonda:~$ curl localhost:27015/alarms/_search?pretty -H 'Content-Type: app
     "hits": {
         "total": {
             "value": 5597,       # <- NÚMERO DE DOCUMENTOS QUE COINCIDEN CON LA QUERY
-            "relation": "eq"
+            "relation": "eq"     # <- (si hay más de 10k, aquí dirá que es "gte")
         },
         "max_score": 4.3358507,
         "hits": [                # <- ARRAY DE LOS PRIMEROS DOCUMENTOS (por defecto devuelve 10)
@@ -110,4 +110,4 @@ Haciendo click en el botón "Query inspector", se revela qué petición le ha ma
 ![](query_inspector.png)
 
 Para obtener datos de Elasticsearch sin depender de interfaces gráficas, lo mejor es utilizar las librerías que se explican en la
-[sección de Python](../conceptos_basicos/queries.html) de este manual. Como hemos visto, las queries pueden ser complicadas de escribir (en especial cuando añadimos agregaciones) y también puede ser un poco incómodo tratar con los resultados que devuelven, así que conviene familiarizarse con estas librerías y con los objetos más comunes del DSL de Elasticsearch.
+[sección de Python](../librerias_de_elasticsearch_en_python/elasticsearch.html) de este manual. Como hemos visto, las queries pueden ser complicadas de escribir (en especial cuando añadimos agregaciones) y también puede ser un poco incómodo tratar con los resultados que devuelven, así que conviene familiarizarse con estas librerías y con los objetos más comunes del DSL de Elasticsearch.
