@@ -76,4 +76,16 @@ En versiones antiguas de Elasticsearch, se permitía el uso arbitrario de "tipos
 
 ## Shards
 
-[Notas sobre asignación de shards](../como_funciona_elasticsearch/configuracion_de_elasticsearch.html#notas-sobre-asignación-de-shards)
+El concepto de [shard](https://en.wikipedia.org/wiki/Shard_(database_architecture)) es bastante común en las bases de datos, y sería algo así como una partición,
+un fragmento de los datos que están contenidos en un índice.
+En Elasticsearch, un shard es una instancia de un índice de Lucene, aunque a nivel práctico no es lo verdaderamente relevante.
+
+Elasticsearch utiliza el shard como la unidad con la que distribuye los datos en un cluster.
+Existen **shards primarios**, que son los que realmente contienen los datos, y **shards réplica**, que ofrecen redundancia sobre esos datos.
+La distribución de shards por los diferentes nodos la gestiona Elasticsearch automáticamente, de manera que, cuando un nodo falla, balancea los datos moviendo los shards necesarios.
+Lógicamente, esta separación de clases de shards en primarios y réplicas solo tiene sentido si trabajamos con *clusters multi-nodo*.
+
+Dividir los índices mediante shards facilita la escalabilidad horizontal e, independientemente del número de nodos, nos permite paralelizar consultas.
+
+Al final de lo que nos tenemos que preocupar nosotros sobre todo es de tener **un número adecuado de shards para nuestro caso**,
+tema que se aborda en la sección de [notas sobre asignación de shards](../como_funciona_elasticsearch/configuracion_de_elasticsearch.html#notas-sobre-asignación-de-shards)
