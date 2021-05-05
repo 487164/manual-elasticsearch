@@ -15,6 +15,6 @@ Nuestra primera intención es que sirva como base para quien empieza con Elastic
 
 #### Lista de contribuidores
 
-- Javier Artiga
-- Pablo Guembe
-- David Moreno
+- [Javier Artiga](mailto:javier.artiga@naudit.es)
+- [Pablo Guembe](mailto:pablo.guembe@naudit.es)
+- [David Moreno](mailto:david.moreno@naudit.es)
