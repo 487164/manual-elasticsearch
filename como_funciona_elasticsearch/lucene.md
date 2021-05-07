@@ -6,7 +6,7 @@ Lucene trabaja con **índices** y **documentos**. Los índices están formados p
 
 El principal objetivo de esta organización de los datos es el de, tras invertir tiempo en su indexado estructurado, agilizar enormemente las búsquedas. De esta manera se permite un acceso rápido y dinámico a una gran cantidad de datos.
 
-## ¿Para qué usa Elasticsearch Lucene?
+## ¿Por qué Elasticsearch utiliza Lucene?
 
 Elastic está basado en Lucene y amplía su alcance y funcionalidades para crear un sistema completo de almacenamiento y búsqueda de datos. Por este motivo, todas las características sobre Lucene que se explican en este apartado son aplicables a los datos gestionados con Elasticsearch.
 

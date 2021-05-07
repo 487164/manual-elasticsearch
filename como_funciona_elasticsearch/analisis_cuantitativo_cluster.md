@@ -63,4 +63,4 @@ Con los pasos incrementales que se definen a continuación, lo que se pretende e
 * Si se van a utilizar [*data tiers*](https://www.elastic.co/guide/en/elasticsearch/reference/current/data-tiers.html) (hot-cold clusters) para gestionar datos más recientes respecto de los más antiguos.
 * Si realmente necesitamos réplicas o con un análisis para solo un nodo es suficiente.
 * Cuánto de importante es la tolerancia a fallos.
-* Continuar la monitorización mediante [Theseus](https://repo1.naudit.es/theseus/theseus-master) tras el despliegue. Ver [Monitorización de Elasticsearch](como_funciona_elasticsearch/monitorizacion_de_elasticsearch.md).
+* Continuar la monitorización mediante [Theseus](https://repo1.naudit.es/theseus/theseus-master) tras el despliegue. Ver [Monitorización de Elasticsearch](../como_funciona_elasticsearch/monitorizacion_de_elasticsearch.html).
