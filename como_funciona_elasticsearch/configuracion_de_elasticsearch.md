@@ -5,7 +5,7 @@ Bajo una instalación por defecto basada en los paquetes de Naudit, la configura
 El fichero de configuración principal de Elasticsearch se encuentra en 
 `/etc/elasticsearch/elasticsearch.yml` y deberá contener por norma general (para ES7) la siguiente configuración:
 
-```
+```yml
 path.data: /disco_flowlytics/elasticsearch/data
 path.logs: /disco_flowlytics/elasticsearch/logs
 
@@ -16,6 +16,28 @@ http.port: 27015
 bootstrap.memory_lock: true
 cluster.initial_master_nodes: ['127.0.0.1']
 ```
+
+En caso de encontrarse instalado el paquete [elasticsearch-conf](https://repo1.naudit.es/deb-repo/elasticsearch-conf), estos valores serán controlados por el fichero `/etc/naudit.d/elasticsearch.ini`.
+El formato y los valores por defecto de susodicho fichero son los siguientes:
+
+```ini
+[Elastic.elasticsearch]
+# Path for data (index)
+path_data=/disco_flowlytics/elasticsearch/data
+# Path for logs (mejor usar el raid para no quemar los SSDs del S.O.)
+path_logs=/disco_flowlytics/elasticsearch/logs
+# Set this to true if you don't want elastic to be swapped
+bootstrap_memory_lock=true
+
+## LISTENING
+# Ip where elasticsearch should listen for. 0.0.0.0 means any available IP. Add as many IPs as you want without spaces and comma separated.
+network_host=0.0.0.0
+# HTTP port where requests should be served
+http_port=27015
+# Cluster master nodes. Should not be empty on ES7. Add as many IPs as you want without spaces and comma separated.
+cluster_initial_master_nodes=127.0.0.1
+```
+
 
 **Notas**:
 - Se establece el network.host a `0.0.0.0` para que Elasticsearch escuche tanto a peticiones externas como internas.
@@ -30,7 +52,7 @@ La decisión de establecer un cluster de un único nodo frente a una configuraci
 
 ¿Cuánto heap? Por lo general, 50% de la RAM disponible. Nunca más de 32GB (es lo máximo que puede usar Elastic).
 
-```
+```yml
 # si los valores de memoria máx. y mín. son iguales,
 # elastic no necesita asignar memoria adicional en ejecución:
 /bin/elasticsearch -Xmx16g -Xms16g
@@ -39,6 +61,7 @@ La decisión de establecer un cluster de un único nodo frente a una configuraci
 ```
 
 Se puede consultar el heap máximo asignado en el nodo actual con:
+
 ```
 GET /_cat/nodes?h=heap.max
 ```
@@ -81,6 +104,7 @@ Esto solo es relevante para configuraciones de cluster.
 Como Elastic asigna shards automáticamente a los nodos, alguno de estos puede convertirse en un "punto peligroso", en caso de que tenga muchos shards para un índice con un alto volumen de indexado.
 
 Para evitar hotspots, se puede configurar el siguiente valor por índice:
+
 ```
 PUT /my-index-000001/_settings
 {
