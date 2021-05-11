@@ -1,18 +1,30 @@
 # Configuración de Elasticsearch
 
-`/etc/elasticsearch/elasticsearch.yml`:
+Bajo una instalación por defecto basada en los paquetes de Naudit, la configuración por defecto la establece el paquete [elasticsearch-conf](https://repo1.naudit.es/deb-repo/elasticsearch-conf).
+
+El fichero de configuración principal de Elasticsearch se encuentra en 
+`/etc/elasticsearch/elasticsearch.yml` y deberá contener por norma general (para ES7) la siguiente configuración:
 
 ```
 path.data: /disco_flowlytics/elasticsearch/data
-path.logs: /var/log/elasticsearch
+path.logs: /disco_flowlytics/elasticsearch/logs
 
 node.name: node1
-network.host: ["10.252.3.142", "127.0.0.1"]
+network.host: 0.0.0.0
 http.port: 27015
 
 bootstrap.memory_lock: true
-discovery.type: single-node
+cluster.initial_master_nodes: ['127.0.0.1']
 ```
+
+**Notas**:
+- Se establece el network.host a `0.0.0.0` para que elasticsearch escuche tanto a peticiones externas como internas.
+Si se desease restringir el acceso del esterior bastaría con cambiar este valor a `127.0.0.1` o en su defecto a alguna de las IPs privadas.
+Tambien es posible proveer un listado de IPs con la siguiente sintaxis: `["10.252.3.142", "127.0.0.1"]`
+
+- Elasticsearch 7 requiere que se establezca alguno de los siguientes valores: `discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes` o en su defecto `discovery.type: single-node`.
+La configuración de arriba es equivalente a `discovery.type: single-node` ya que aunque Elasticsearch sigue funcionando en modo cluster, a efectos prácticos es el único nodo y actúa siempre como Máster.
+La decisión de establecer un cluster de un único nodo frente a una configuración estricta mono-nodo se ha hecho por motivos de gestionabilidad de los scripts de generación de configuración automática.
 
 ## Definir la memoria heap para Elastic:
 
@@ -30,6 +42,8 @@ Se puede consultar el heap máximo asignado en el nodo actual con:
 ```
 GET /_cat/nodes?h=heap.max
 ```
+
+En instalaciones estándar el paquete [elasticsearch-conf](https://repo1.naudit.es/deb-repo/elasticsearch-conf) establece esta configuración a 16g por defecto.
 
 ## Notas sobre asignación de shards
 
