@@ -18,12 +18,12 @@ cluster.initial_master_nodes: ['127.0.0.1']
 ```
 
 **Notas**:
-- Se establece el network.host a `0.0.0.0` para que elasticsearch escuche tanto a peticiones externas como internas.
-Si se desease restringir el acceso del esterior bastaría con cambiar este valor a `127.0.0.1` o en su defecto a alguna de las IPs privadas.
-Tambien es posible proveer un listado de IPs con la siguiente sintaxis: `["10.252.3.142", "127.0.0.1"]`
+- Se establece el network.host a `0.0.0.0` para que Elasticsearch escuche tanto a peticiones externas como internas.
+Si se desease restringir el acceso del exterior bastaría con cambiar este valor a `127.0.0.1` o en su defecto a alguna de las IPs privadas.
+También es posible proveer un listado de IPs con la siguiente sintaxis: `["10.252.3.142", "127.0.0.1"]`
 
 - Elasticsearch 7 requiere que se establezca alguno de los siguientes valores: `discovery.seed_hosts, discovery.seed_providers, cluster.initial_master_nodes` o en su defecto `discovery.type: single-node`.
-La configuración de arriba es equivalente a `discovery.type: single-node` ya que aunque Elasticsearch sigue funcionando en modo cluster, a efectos prácticos es el único nodo y actúa siempre como Máster.
+La configuración de arriba es equivalente a `discovery.type: single-node` ya que, aunque Elasticsearch sigue funcionando en modo cluster, a efectos prácticos es el único nodo y actúa siempre como Máster.
 La decisión de establecer un cluster de un único nodo frente a una configuración estricta mono-nodo se ha hecho por motivos de gestionabilidad de los scripts de generación de configuración automática.
 
 ## Definir la memoria heap para Elastic:
