@@ -7,14 +7,14 @@ además de documentar ciertos temas relacionados con Elasticsearch.
 
 Empezamos este documento en noviembre de 2020 (cuando Elasticsearch estaba como por la versión 7.10-7.11),
 y cerramos una primera versión completa en abril de 2021.
-Nuestra primera intención es que sirva como base para quien empieza con Elastic, pero está abierto a [contribuciones y mejoras](https://repo1.naudit.es/jartigag/manual-elasticsearch/-/merge_requests).
+Nuestra primera intención es que sirva como base para quien empieza con Elastic, pero está abierto a [contribuciones y mejoras](https://github.com/487164/manual-elasticsearch/pulls).
 
 <center>
-    <img src="https://www.naudit.es/wp-content/uploads/logo2.png" width="100%">
+    <img src="https://naudit.es/wp-content/uploads/2024/01/logo-naudit-retina-normal.png" width="100%">
 </center>
 
 #### Lista de contribuidores
 
-- [Javier Artiga](mailto:javier.artiga@naudit.es)
-- [Pablo Guembe](mailto:pablo.guembe@naudit.es)
-- [David Moreno](mailto:david.moreno@naudit.es)
+- [Javier Artiga](mailto:javier@artiga.es)
+- Pablo Guembe
+- David Moreno
